@@ -47,6 +47,8 @@ class BubbleNormalAudio extends StatelessWidget {
   final bool seen;
   final TextStyle textStyle;
   final BoxConstraints? constraints;
+  final Color? buttonBgColor;
+  final Color? buttonIconColor;
 
   BubbleNormalAudio({
     Key? key,
@@ -69,6 +71,8 @@ class BubbleNormalAudio extends StatelessWidget {
       color: Colors.black87,
       fontSize: 12,
     ),
+    this.buttonBgColor,
+    this.buttonIconColor,
   }) : super(key: key);
 
   ///chat bubble builder method
@@ -143,11 +147,12 @@ class BubbleNormalAudio extends StatelessWidget {
                       RawMaterialButton(
                         onPressed: onPlayPauseButtonClick,
                         elevation: 1.0,
-                        fillColor: Colors.white,
+                        fillColor: buttonBgColor ?? Colors.white,
                         child: !isPlaying
                             ? Icon(
                                 Icons.play_arrow,
                                 size: 30.0,
+                                color: buttonIconColor ?? Colors.black,
                               )
                             : isLoading
                                 ? CircularProgressIndicator()
@@ -155,16 +160,19 @@ class BubbleNormalAudio extends StatelessWidget {
                                     ? Icon(
                                         Icons.play_arrow,
                                         size: 30.0,
+                                        color: buttonIconColor ?? Colors.black,
                                       )
                                     : Icon(
                                         Icons.pause,
                                         size: 30.0,
+                                        color: buttonIconColor ?? Colors.black,
                                       ),
                         padding: EdgeInsets.all(0.0),
                         shape: CircleBorder(),
                       ),
                       Expanded(
                         child: Slider(
+                          padding: EdgeInsets.symmetric(horizontal: 8),
                           min: 0.0,
                           max: duration ?? 0.0,
                           value: position ?? 0.0,
